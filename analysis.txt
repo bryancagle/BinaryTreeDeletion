@@ -1,0 +1,54 @@
+/***************
+Name: Bryan Cagle
+Course: CSCE 3110.001
+Assignment: Programming Assignment 3 - Binary Tree Deletion
+Due Date: March 26, 2016 11:59pm
+
+Desciprtion: the purpose of this program is to implement
+a program that will remove nodes from a binary tree from the
+root (in order to test the effectiveness of deleting nodes with
+two children) and measuring the number of recursion and function
+calls required.
+
+This is the analysis based on results of testing the three programs
+***************/
+
+
+In analyzing the method of deletion for each of the programs, I used a counter that iterates
+at the beginning of each necessary function involved in deletion in order to see how many function
+calls are created. The reason for this over using the clock() function is because the program would
+complete faster than the clock would time, resulting in a time of 0 for each run. This is ineffective in
+comparison.
+
+In order for a fair comparison, I used a default input sequence that results in a balanced, complete BST
+with a height of 3 with 15 total nodes. The operation performed is an automatic loop that removes the
+root of the tree (so that the most possible cases of a node having two children is tested), and counts
+the total number of function calls, including recursive calls that were made. This is looped until all
+nodes are deleted in the tree, then the total number of function calls is displayed, which should give
+and indication of how long it would take. For part a and b, one run of the program is good enough for
+a measurement because it deletes nodes in the same way every time. Part c uses a random number generator
+in order to choose which side of the tree is used for node removal. Because of the randomness, I have it
+so that it loops creating and deleting the tree 50 times, each time calculating the number of function calls
+it takes to complete the tree removal. Then I take the average of this number in order to find an average number
+of funcion calls needed for part c. The results are as follows:
+
+a.cpp - 75 function calls for removal of tree
+b.cpp - 89 function calls for removal of tree
+c.cpp - 84.50 function calls on average for removal of tree
+
+Which strategy seems to give the most balance?
+
+The strategy that would give most balance would be the one used in b.cpp. This effectively keeps the shape of the tree
+relatively the same as the nodes are being deleted due to both sides taking turns on being delteted.
+
+Which takes the least CPU time to process the entire sequence
+The strategy with the least function calls was a.cpp
+
+
+Unsurprisingly, a.cpp and b.cpp are at the extreme ends of the possible outcomes, where a.cpp is the most effective method for deleting nodes with two children.
+This is most likely because it deals with deleting nodes with two children for only half of the tree, since there will be a point where the left node is empty
+once they have all been deleted. At that point, it only has one child to delete which takes less recursion. This is something that does not happen in b.cpp 
+because it equally deletes nodes on the left and right side, which means the parent will always have two children up until the final deletion. c.cpp follows 
+the same model as b.cpp, but will eventually delete one side of the tree before the other through the randomness. However, the worst case is still very 
+possible for c.cpp as there were outputs with 89 function calls.
+
